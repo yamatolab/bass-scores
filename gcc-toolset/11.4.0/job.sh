@@ -7,7 +7,7 @@
 VERSION="11.4.0"
 PACKAGE_PREFIX=/apl/packages/util/gcc-toolset/$VERSION
 
-WORK_DIR=/lwork/$USER/$PBS_JOBID
+WORK_DIR=/lwork/users/$USER/$PBS_JOBID
 mkdir -p $WORK_DIR
 cd $WORK_DIR
 
