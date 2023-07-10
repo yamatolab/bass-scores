@@ -1,0 +1,14 @@
+#%Module1.0
+
+set prefix TEMPLATE_PREFIX
+
+prepend-path PATH            $prefix/bin
+prepend-path LD_LIBRARY_PATH $prefix/lib64
+prepend-path PKG_CONFIG_PATH $prefix/lib64/pkgconfig
+prepend-path MANPATH         $prefix/share/man
+
+setenv       GMXBIN          $prefix/bin
+setenv       GMXDATA         $prefix/share/gromacs
+setenv       GMXLDLIB        $prefix/lib64
+setenv       GMXMAN          $prefix/share/man
+setenv       GROMACS_DIR     $prefix
