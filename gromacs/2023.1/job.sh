@@ -24,8 +24,11 @@ tar -xvf "gromacs-${version}.tar.gz"
 cd "gromacs-${version}"
 
 # Build
-./configure --prefix=$PREFIX
+mkdir build
+cd build
+cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
 make -j `nproc`
+make check
 make install
 
 # Create modulefile
