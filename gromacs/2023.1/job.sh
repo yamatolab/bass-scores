@@ -34,3 +34,7 @@ mkdir -p `dirname $module_file_path`
 # Set template variables
 export TEMPLATE_PREFIX=$PREFIX
 envsubst < $APPLICATION_REPOSITORY_PATH/$name/template_modulefile > $module_file_path
+
+# Clean up
+cd $HOME
+rm -rf $WORK_DIR
