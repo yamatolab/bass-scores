@@ -16,7 +16,10 @@ tar -xvf "gcc-${VERSION}.tar.xz"
 
 mkdir objdir
 cd objdir
-$PWD/../"gcc-${VERSION}"/configure --prefix=${PACKAGE_PREFIX} --enable-languages=c,c++,fortran
+$PWD/../"gcc-${VERSION}"/configure \
+    --prefix=${PACKAGE_PREFIX} \
+    --enable-languages=c,c++,fortran \
+    --disable-multilib
 make -j `nproc`
 make install
 
