@@ -13,9 +13,7 @@ version=2023.1
 
 PREFIX=$PREFIX_APP_DIR/packages/$software_kind/$name/$version
 
-# Prepare working directory
 WORK_DIR=/lwork/users/$USER/$PBS_JOBID
-mkdir -p $WORK_DIR
 cd $WORK_DIR
 
 # Download source
@@ -26,10 +24,18 @@ cd "gromacs-${version}"
 # Build
 mkdir build
 cd build
-cmake .. -DGMX_BUILD_OWN_FFTW=ON -DREGRESSIONTEST_DOWNLOAD=ON
+cmake .. \
+    -DGMX_BUILD_OWN_FFTW=ON \
+    -DREGRESSIONTEST_DOWNLOAD=ON \
+    -DCMAKE_INSTALL_PREFIX=$PREFIX
 make -j `nproc`
+# Unset OMP_NUM_THREADS to avoid errors in test.
+# OMP_NUM_THREADS is set by default in PBS.
+unset OMP_NUM_THREADS
 make check
 make install
+# By default, the installation directory is not executable by group.
+find $PREFIX_APP_DIR/packages/$software_kind/$name/ -type d -exec chmod 755 {} \;
 
 # Create modulefile
 module_file_path=$PREFIX_APP_DIR/modules/$software_kind/$name/$version
@@ -37,7 +43,3 @@ mkdir -p `dirname $module_file_path`
 # Set template variables
 export TEMPLATE_PREFIX=$PREFIX
 envsubst < $APPLICATION_REPOSITORY_PATH/$name/template_modulefile > $module_file_path
-
-# Clean up
-cd $HOME
-rm -rf $WORK_DIR
