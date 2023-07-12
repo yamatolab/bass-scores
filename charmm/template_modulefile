@@ -1,0 +1,8 @@
+#%Module1.0
+
+depends-on $TEMPLATE_DEPENDS_ON
+
+set prefix TEMPLATE_PREFIX
+
+prepend-path PATH $prefix/bin
+prepend-path PATH $prefix/tool
