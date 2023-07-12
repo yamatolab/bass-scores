@@ -8,7 +8,7 @@ software_kind=util
 name="openmpi"
 version="4.1.5"
 compiler="gcc-11.4.0"
-module_loaded="gcc/11.4.0"
+module_loaded="gcc-toolset/11.4.0"
 
 module load $module_loaded
 
