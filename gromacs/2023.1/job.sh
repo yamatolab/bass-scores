@@ -43,3 +43,8 @@ mkdir -p `dirname $module_file_path`
 # Set template variables
 export TEMPLATE_PREFIX=$PREFIX
 envsubst < $APPLICATION_REPOSITORY_PATH/$name/template_modulefile > $module_file_path
+
+## Ensure all users have executable permission for all directories
+## and read permission for all files
+find $PREFIX_APP_DIR/modules/$software_kind/$name -type d -exec chmod 755 {} \;
+chmod 644 $PREFIX_APP_DIR/modules/$software_kind/$name/$version
