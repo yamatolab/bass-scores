@@ -27,6 +27,7 @@ module load cuda/10.2
 patch -u cmake/PythonBuildConfig.cmake \
     -i $APPLICATION_REPOSITORY_PATH/$name/$version/fix_key_of_unix_prefix.patch
 
+cd build
 cmake ../ \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DCOMPILER=GNU  \
