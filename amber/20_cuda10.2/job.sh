@@ -34,6 +34,11 @@ cmake ../ \
     -DMPI=FALSE -DCUDA=TRUE -DINSTALL_TESTS=TRUE \
     -DDOWNLOAD_MINICONDA=TRUE \
     2>&1 | tee cmake.log
+make -j `ncproc` 2>&1 | tee make.log
+make install 2>&1 | tee make_install.log
+
+mkdir $PREFIX/build_logs
+cp cmake.log make.log make_install.log $PREFIX/build_logs
 
 # Create modulefile
 module_file_path=$PREFIX_APP_DIR/modules/$software_kind/$name/$version
