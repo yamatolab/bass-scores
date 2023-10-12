@@ -19,9 +19,13 @@ cp $APPLICATION_REPOSITORY_PATH/src/AmberTools20.tar.bz2 .
 # Build
 tar -xvf Amber20.tar.bz2
 tar -xvf AmberTools20.tar.bz2
-cd amber20_src/build
+cd amber20_src/
 
 module load cuda/10.2
+
+# Apply patch
+patch -u cmake/PythonBuildConfig.cmake \
+    -i $APPLICATION_REPOSITORY_PATH/$name/$version/fix_key_of_unix_prefix.patch
 
 cmake ../ \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \

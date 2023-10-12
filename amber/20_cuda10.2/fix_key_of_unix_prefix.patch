@@ -1,0 +1,11 @@
+--- cmake/PythonBuildConfig.cmake	2020-04-28 10:19:51.000000000 +0900
++++ cmake/PythonBuildConfigNew.cmake	2023-10-13 01:20:37.049121506 +0900
+@@ -111,7 +111,7 @@
+ 		if(TARGET_WINDOWS)
+ 			set(SCHEME_KEY "nt")
+ 		else()
+-			set(SCHEME_KEY "unix_prefix")
++			set(SCHEME_KEY "posix_prefix")
+ 		endif()
+ 	
+ 		# this was REALLY hard to figure out.  Seriously, I've created entire programs' build files in less time than it took to get this command working on all systems.
