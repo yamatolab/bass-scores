@@ -1,6 +1,6 @@
 #%Module1.0
 
-depends-on $TEMPLATE_DEPENDS_ON
+module load $TEMPLATE_DEPENDS_ON
 
 set prefix TEMPLATE_PREFIX
 

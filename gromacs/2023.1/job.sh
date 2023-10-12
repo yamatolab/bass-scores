@@ -27,8 +27,23 @@ tar -xvf "gromacs-${version}.tar.gz"
 cd "gromacs-${version}"
 
 # Build
+
+## Normal version
 mkdir build
 cd build
+cmake .. \
+    -DGMX_BUILD_OWN_FFTW=ON \
+    -DREGRESSIONTEST_DOWNLOAD=ON \
+    -DCMAKE_INSTALL_PREFIX=$PREFIX
+make -j `nproc`
+# Unset OMP_NUM_THREADS to avoid errors in test.
+# OMP_NUM_THREADS is set by default in PBS.
+unset OMP_NUM_THREADS
+make check
+make install
+
+## MPI version
+rm -rf *
 cmake .. \
     -DGMX_BUILD_OWN_FFTW=ON \
     -DREGRESSIONTEST_DOWNLOAD=ON \
@@ -40,6 +55,7 @@ make -j `nproc`
 unset OMP_NUM_THREADS
 make check
 make install
+
 # By default, the installation directory is not executable by group.
 find $PREFIX_APP_DIR/packages/$software_kind/$name/ -type d -exec chmod 755 {} \;
 
