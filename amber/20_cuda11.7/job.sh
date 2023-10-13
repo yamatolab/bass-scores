@@ -68,5 +68,7 @@ envsubst '$TEMPLATE_PREFIX $TEMPLATE_CUDA_VERSION' \
 
 ## Ensure all users have executable permission for all directories
 ## and read permission for all files
+find $PREFIX_APP_DIR/packages/$software_kind/$name -type d -exec chmod 755 {} \;
+
 find $PREFIX_APP_DIR/modules/$software_kind/$name -type d -exec chmod 755 {} \;
 chmod 644 $PREFIX_APP_DIR/modules/$software_kind/$name/$version
