@@ -25,7 +25,9 @@ mkdir -p `dirname $module_file_path`
 # TODO: Write template variables here
 # Commands below assume that TEMPLATE_PREFIX is used in template_modulefile
 export TEMPLATE_PREFIX=$PREFIX
-envsubst < $APPLICATION_REPOSITORY_PATH/$name/template_modulefile > $module_file_path
+envsubst '$TEMPLATE_PREFIX' \
+    < $APPLICATION_REPOSITORY_PATH/$name/template_modulefile \
+    > $module_file_path
 
 ## Ensure all users have executable permission for all directories
 ## and read permission for all files
