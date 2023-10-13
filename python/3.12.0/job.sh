@@ -17,7 +17,7 @@ wget "https://www.python.org/ftp/python/${version}/Python-${version}.tgz"
 tar -xvf "Python-${version}.tgz"
 
 # Build
-cd "Python-${version}.tgz"
+cd "Python-${version}"
 ./configure \
     --prefix=$PREFIX \
     --enable-optimizations
