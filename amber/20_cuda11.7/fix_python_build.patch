@@ -1,0 +1,10 @@
+--- AmberTools/src/quick/cmake/UseMiniconda.cmake	2021-04-29 00:24:59.122571706 +0900
++++ AmberTools/src/quick/cmake/UseMinicondaNew.cmake	2023-10-13 20:30:23.870420800 +0900
+@@ -92,6 +92,7 @@
+ 		endif()
+ 	endif()
+ 	
++	set(MINICONDA_VERSION "py310_23.5.2-0")
+ 	set(MINICONDA_INSTALLER_FILENAME "Miniconda${PYTHON_MAJOR_RELEASE}-${MINICONDA_VERSION}-${CONTINUUM_SYSTEM_NAME}-${CONTINUUM_BITS}.${INSTALLER_SUFFIX}")
+ 	
+ 	# location to download the installer to

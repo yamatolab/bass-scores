@@ -1,0 +1,10 @@
+--- cmake/UseMiniconda.cmake	2023-10-13 15:42:13.810421024 +0900
++++ cmake/UseMinicondaNew.cmake	2023-10-13 21:48:52.840413280 +0900
+@@ -92,6 +92,7 @@
+ 		endif()
+ 	endif()
+ 	
++	set(MINICONDA_VERSION "py310_23.5.2-0")
+ 	set(MINICONDA_INSTALLER_FILENAME "Miniconda${PYTHON_MAJOR_RELEASE}-${MINICONDA_VERSION}-${CONTINUUM_SYSTEM_NAME}-${CONTINUUM_BITS}.${INSTALLER_SUFFIX}")
+ 	
+ 	# location to download the installer to
