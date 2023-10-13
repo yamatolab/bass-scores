@@ -25,6 +25,11 @@ make -j `nproc`
 make test
 make install
 
+pushd $PREFIX/bin
+ln -s python3 python
+ln -s pip3 pip
+popd
+
 # Create modulefile
 module_file_path=$PREFIX_APP_DIR/modules/$software_kind/$name/$version
 mkdir -p `dirname $module_file_path`
