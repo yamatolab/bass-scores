@@ -23,11 +23,10 @@ tar -xvf AmberTools20.tar.bz2
 cd amber20_src/
 
 # Apply official patches
-source ~/miniconda3/bin/activate
-AMBERSOURCE=`pwd`
-echo 'y' | $AMBERSOURCE/update_amber --upgrade
-$AMBERSOURCE/update_amber --update
-conda deactivate
+module load python
+echo 'y' | ./update_amber --upgrade
+./update_amber --update
+module unload python
 
 # http://archive.ambermd.org/202110/0196.html
 rm AmberTools/src/leap/src/leap/getline.c
