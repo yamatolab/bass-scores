@@ -38,6 +38,8 @@ patch -u AmberTools/src/quick/cmake/UseMiniconda.cmake \
    -i $APPLICATION_REPOSITORY_PATH/$name/$version/fix_python_build.patch
 patch -u cmake/UseMiniconda.cmake \
    -i $APPLICATION_REPOSITORY_PATH/$name/$version/fix_python_build_.patch
+patch -u src/pmemd/src/cuda/gpu.cpp \
+   -i $APPLICATION_REPOSITORY_PATH/$name/$version/fix_pmemd_gpu_syntax.patch
 
 module load cuda/11.7
 
