@@ -5,7 +5,8 @@
 # Parameters
 software_kind=apl
 name=amber
-version=20_cuda11.7
+cuda_version=11.7
+version="20_cuda${cuda_version}"
 
 PREFIX=$PREFIX_APP_DIR/packages/$software_kind/$name/$version
 
@@ -61,8 +62,9 @@ mkdir -p `dirname $module_file_path`
 # Set template variables
 # Commands below assume that TEMPLATE_PREFIX is used in template_modulefile
 export TEMPLATE_PREFIX=$PREFIX
-envsubst '$TEMPLATE_PREFIX' \
-   < $APPLICATION_REPOSITORY_PATH/$name/template_modulefile \
+export TEMPLATE_CUDA_VERSION=$cuda_version
+envsubst '$TEMPLATE_PREFIX $TEMPLATE_CUDA_VERSION' \
+   < $APPLICATION_REPOSITORY_PATH/$name/$version/template_modulefile \
    > $module_file_path
 
 ## Ensure all users have executable permission for all directories
