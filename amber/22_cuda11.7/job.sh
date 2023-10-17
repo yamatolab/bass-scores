@@ -6,7 +6,7 @@
 software_kind=apl
 name=amber
 cuda_version=11.7
-version="20_cuda${cuda_version}"
+version="22_cuda${cuda_version}"
 
 PREFIX=$PREFIX_APP_DIR/packages/$software_kind/$name/$version
 
@@ -14,32 +14,19 @@ WORK_DIR=/lwork/users/$USER/$PBS_JOBID
 cd $WORK_DIR
 
 # Download source
-cp $APPLICATION_REPOSITORY_PATH/src/Amber20.tar.bz2 .
-cp $APPLICATION_REPOSITORY_PATH/src/AmberTools20.tar.bz2 .
+cp $APPLICATION_REPOSITORY_PATH/src/Amber22.tar.bz2 .
+cp $APPLICATION_REPOSITORY_PATH/src/AmberTools23.tar.bz2 .
 
 # Build
-tar -xvf Amber20.tar.bz2
-tar -xvf AmberTools20.tar.bz2
-cd amber20_src/
+tar -xvf Amber22.tar.bz2
+tar -xvf AmberTools23.tar.bz2
+cd amber22_src/
 
 # Apply official patches
 module load python
 echo 'y' | ./update_amber --upgrade
 ./update_amber --update
 module unload python
-
-# http://archive.ambermd.org/202110/0196.html
-rm AmberTools/src/leap/src/leap/getline.c
-cp $APPLICATION_REPOSITORY_PATH/$name/$version/getline.c AmberTools/src/leap/src/leap/getline.c
-
-#patch -u cmake/PythonBuildConfig.cmake \
-#    -i $APPLICATION_REPOSITORY_PATH/$name/$version/fix_key_of_unix_prefix.patch
-patch -u AmberTools/src/quick/cmake/UseMiniconda.cmake \
-   -i $APPLICATION_REPOSITORY_PATH/$name/$version/fix_python_build.patch
-patch -u cmake/UseMiniconda.cmake \
-   -i $APPLICATION_REPOSITORY_PATH/$name/$version/fix_python_build_.patch
-patch -u src/pmemd/src/cuda/gpu.cpp \
-   -i $APPLICATION_REPOSITORY_PATH/$name/$version/fix_pmemd_gpu_syntax.patch
 
 module load cuda/11.7
 
@@ -49,7 +36,6 @@ cmake ../ \
     -DCOMPILER=GNU  \
     -DMPI=FALSE -DCUDA=TRUE -DINSTALL_TESTS=TRUE \
     -DDOWNLOAD_MINICONDA=TRUE \
-    -DBUILD_PYTHON=FALSE \
     2>&1 | tee cmake.log
 make -j `nproc` 2>&1 | tee make.log
 make install 2>&1 | tee make_install.log
