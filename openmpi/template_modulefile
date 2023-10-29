@@ -1,8 +1,6 @@
 #%Module1.0
 
-module load $TEMPLATE_DEPENDS_ON
-
-set prefix TEMPLATE_PREFIX
+set prefix $TEMPLATE_PREFIX
 
 setenv MPI_ROOT $prefix
 setenv MPICC    mpicc
