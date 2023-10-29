@@ -6,6 +6,7 @@
 software_kind=util
 name=openmpi
 version=4.1.6
+PBS_EXEC=/opt/openpbs
 
 PREFIX=$PREFIX_APP_DIR/packages/$software_kind/$name/$version
 
@@ -22,7 +23,7 @@ cd openmpi-4.1.6
 export LD_LIBRARY_PATH=$PBS_EXEC/lib:$LD_LIBRARY_PATH
 export LDFLAGS="-L${PBS_EXEC}/lib -lpbs"
 ./configure \
-    --prefix=${PREFIX} \
+    --prefix=$PREFIX \
     --with-tm=$PBS_EXEC
 make -j 28
 make install
