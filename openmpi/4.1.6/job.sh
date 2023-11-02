@@ -1,5 +1,5 @@
 #!/bin/bash -eu
-#PBS -l select=1:ncpus=28
+#PBS -l select=1:ncpus=4
 #PBS -l walltime=24:00:00
 
 # Parameters
@@ -18,14 +18,11 @@ wget "https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-${version}.tar
 
 # Build
 tar -xvf openmpi-${version}.tar.bz2
-cd openmpi-4.1.6
+cd openmpi-${version}
 
-export LD_LIBRARY_PATH=$PBS_EXEC/lib:$LD_LIBRARY_PATH
-export LDFLAGS="-L${PBS_EXEC}/lib -lpbs"
 ./configure \
-    --prefix=$PREFIX \
-    --with-tm=$PBS_EXEC
-make -j 28
+    --prefix=$PREFIX
+make -j `nproc`
 make install
 
 # Create modulefile
