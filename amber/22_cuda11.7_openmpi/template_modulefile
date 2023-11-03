@@ -1,0 +1,11 @@
+#%Module1.0
+
+module load cuda/$TEMPLATE_CUDA_VERSION
+module load openmpi/$TEMPLATE_OPENMPI_VERSION
+
+set prefix $TEMPLATE_PREFIX
+
+prepend-path PATH            $prefix/bin
+prepend-path LD_LIBRARY_PATH $prefix/lib
+prepend-path MANPATH         $prefix/share/man
+prepend-path AMBERHOME       $prefix
